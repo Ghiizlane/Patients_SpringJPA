@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  
+	  xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout" 
+	  layout:decorator="template1" 
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+<title>Error</title>
+</head>
+<body>
+<div  layout:fragment="content">
+<div Class="container" >
+<div Class="ligne">
+<div Class="de span4">
+<div class="alert" style="margin-top:20%;margin-left:20%;">
+<a class="close" data-dismiss="alert"> × </a>
+<h3 class="text-danger"><Strong> Attention! </Strong> Vous n'etes pas authorise</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

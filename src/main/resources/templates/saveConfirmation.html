@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  
+	  xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout" 
+	  layout:decorator="template1"><!-- dire que je vais décorer la page avec  template1-->
+
+<body>
+<div layout:fragment="content">
+<div class="card  mt-5">
+  <div class="card-header text-center">
+     <h5 class="card-title"> Bien effectue</h5>
+  </div>
+  <div class="card-body">
+  
+    <div class="form-group">
+    <label>ID : </label>
+    <strong><label th:text="${patient.id}"></label></strong>
+    </div>
+     <div class="form-group">
+    <label>Nom : </label>
+    <strong><label th:text="${patient.nom}"></label></strong>
+    </div>
+     <div class="form-group">
+    <label>Date de Naissance : </label>
+    <strong><label th:text="${patient.dateNaissance}"></label></strong>
+    </div>
+     <div class="form-group">
+    <label>Score : </label>
+    <strong><label th:text="${patient.score}"></label></strong>
+    </div>
+     <div class="form-group">
+    <label>Malade : </label>
+    <strong><label th:text="${patient.malade}"></label></strong>
+    </div>
+    <br>
+    <a th:href="@{patientsList}" class="btn btn-primary"> <-Home</a>
+  </div>
+  <div class="card-footer text-muted">
+    
+  </div>
+</div>
+</div>
+</body>
+</html>

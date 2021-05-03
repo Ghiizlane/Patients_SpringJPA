@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  
+	  xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout" 
+	  layout:decorator="template1" 
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<body>
+<div layout:fragment="content">
+<div class="container mt-3">
+<div class="card">
+<div class="card-header"><h3> Liste des patients</h3></div>
+<div class="card-body">
+
+  <form class="form-inline" th:action="@{patientsList}" method="get">
+    <fieldset>    
+      <div class="input-group">
+        <input id="key" name="key" type="text" class="form-control" aria-label="Saisie le nom" required="required" th:value="${key}">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">Recherche</button>
+        </div>
+      </div>
+    </fieldset> 
+  </form>
+  <br>
+<table class="table"> 
+<tr>
+<th>Id</th>
+<th>Nom</th>
+<th>Date de Naissance</th>
+<th>Score</th>
+<th>Malade ?</th>
+</tr>
+<tr th:each="patient:${patients}">
+<td th:text="${patient.id}"></td>
+<td th:text="${patient.nom}"></td>
+<td th:text="${patient.dateNaissance}"></td>
+<td th:text="${patient.score}"></td>
+<td th:text="${patient.malade}"></td>
+<td sec:authorize="hasRole('ROLE_ADMIN')"><a onclick="return confirm('Confirmer la supprission !')" th:href="@{deletePatient(id=${patient.id},key=${key}, page=${page}, size=${size})}"><button type="button" class="btn btn-danger">
+<i class="bx bx-trash">Delete</i>
+</button></a></td>
+<td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{editPatient(id=${patient.id})}" class="btn btn-success" >Edit</a>
+</td>
+</tr>
+
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    
+     <li class="page-item" th:each="page,status:${pages}">
+     <a class="page-link" th:href="@{patientsList(page=${status.index}, key=${key})}" th:text="${status.index}"></a>
+     </li> 
+      <!-- status: parcourir le status des éléments (indices du tableau passé dans le modèle) -->
+    
+  </ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  
+	  xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout" 
+	  layout:decorator="template1"><!-- dire que je vais décorer la page avec  template1-->
+
+<body>
+<div layout:fragment="content">
+<div class="container w-50 mt-5">
+<h3 style="text-align: center;" th:if="${mode=='new'}">Ajouter Patient</h3>
+<h3 style="text-align: center;" th:if="${mode=='edit'}">Modifier informations du patient <span th:text="${patient.id}"></span></h3>
+
+<form th:action="@{savePatient}" method="post">
+  
+  <div class="form-group">
+    <label for="nom">Nom</label>
+    <input type="text" class="form-control" id="nom" name="nom"  placeholder="Nom Complet..."  th:value="${patient.nom}">
+    <span th:errors="${patient.nom}" class="text-danger"></span>
+  </div>
+  
+   <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="dateNaissance">Date de naissance</label>
+    <input type="date" class="form-control" id="dateNaissance"  name=dateNaissance placeholder="jj/mm/aaaa...."  th:value="${patient.dateNaissance}">
+    <span th:errors="${patient.dateNaissance}" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="scord">Score</label>
+      <input type="number" class="form-control" id="score" name="score" placeholder="scord..."  th:value="${patient.score}">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+     <input class="form-check-input" type="checkbox" id="malade" name="malade"   th:value="${patient.malade}">
+      <label class="form-check-label" for="malade">
+        Malade
+      </label>
+        <span th:errors="${patient.malade}" class="text-danger"></span>
+      
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" name="submit">Enregistrer</button>
+</form>
+</div>
+</div>
+</body>
+</html>

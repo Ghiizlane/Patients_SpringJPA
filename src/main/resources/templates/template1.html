@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--déclarer les namespace de thymeleaf-->
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+<meta charset="utf-8">
+<title>Patients</title>
+<link rel="stylesheet"  type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;color:black;">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#" style="font-family:fantasy;">Gestion des Patients</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{patientsList}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{patientsList}">Medecins</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
+        Patients
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" th:href="@{patientsList}">Liste des patients</a>
+        <a class="dropdown-item" th:href="@{formPatient}" sec:authorize="hasRole('ROLE_ADMIN')">Ajouter un patient</a>
+        <a class="dropdown-item" th:href="@{patientsList}">Chercher </a>
+      </div> 
+    </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" >
+      <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+      <span sec:authorize="isAuthenticated()">
+       <span sec:authentication="name"></span>
+      </span>
+       <span sec:authorize="!isAuthenticated()">
+       <span >Visiteur</span>
+      </span>
+      </a>
+      <div class="dropdown-menu">
+        <a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{login}">Login</a>
+        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
+ 		<a sec:authorize="isAuthenticated()" class="dropdown-item" href="#">Profile</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section layout:fragment="content" >
+</section>
+</body>
+</html>
